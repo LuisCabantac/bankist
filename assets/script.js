@@ -161,6 +161,23 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+const scrollToTop = function () {
+  document.querySelector("body").scrollIntoView({ behavior: "smooth" });
+};
+
+const displayLoginSection = function () {
+  containerApp.style.opacity = 0;
+  loginSection.style.display = "flex";
+  loginSection.style.opacity = 1;
+  loginSection.style.visibility = "visible";
+};
+
+const hideLoginSection = function () {
+  loginSection.style.display = "none";
+  loginSection.style.opacity = 0;
+  loginSection.style.visibility = "hidden";
+};
+
 const startLogOutTimer = function () {
   const tick = function () {
     const min = String(Math.trunc(time / 60)).padStart(2, 0);
@@ -171,8 +188,8 @@ const startLogOutTimer = function () {
     if (time === 0) {
       clearInterval(timer);
       labelWelcome.textContent = "Log in to get started";
-      containerApp.style.opacity = 0;
-      loginSection.style.display = "flex";
+      displayLoginSection();
+      scrollToTop();
     }
 
     time--;
@@ -222,7 +239,7 @@ btnLogin.addEventListener("click", function (e) {
     timer = startLogOutTimer();
 
     updateUI(currentAccount);
-    loginSection.style.display = "none";
+    hideLoginSection();
   }
 });
 
@@ -293,16 +310,15 @@ btnClose.addEventListener("click", function (e) {
 
     accounts.splice(index, 1);
 
-    containerApp.style.opacity = 0;
-    loginSection.style.display = "flex";
+    displayLoginSection();
+    scrollToTop();
   }
 
   inputCloseUsername.value = inputClosePin.value = "";
 });
 
 btnSignout.addEventListener("click", function () {
-  containerApp.style.opacity = 0;
-  loginSection.style.display = "flex";
-
   updateUI(currentAccount);
+  displayLoginSection();
+  scrollToTop();
 });
