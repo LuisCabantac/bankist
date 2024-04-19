@@ -309,11 +309,9 @@ btnClose.addEventListener("click", function (e) {
     );
 
     accounts.splice(index, 1);
-
-    displayLoginSection();
-    scrollToTop();
   }
-
+  displayLoginSection();
+  scrollToTop();
   inputCloseUsername.value = inputClosePin.value = "";
 });
 
