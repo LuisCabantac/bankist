@@ -1,9 +1,3 @@
-/*
- * Use this CSS to learn some intersting techniques,
- * in case you're wondering how I built the UI.
- * Have fun! 😁
- */
-
 * {
   margin: 0;
   padding: 0;
@@ -23,14 +17,8 @@ body {
   padding: 2rem;
 }
 
-/* nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2rem;
-} */
-
-.welcome {
+.welcome,
+.login_p {
   font-size: 2.5rem;
   font-weight: 500;
 }
@@ -92,7 +80,7 @@ body {
 .signout_btn {
   position: relative;
   top: 5rem;
-  width: 15ch;
+  left: 4rem;
 }
 
 .login__btn:hover,
@@ -109,10 +97,6 @@ body {
   align-items: center;
   justify-content: space-between;
 }
-
-/* .bottom__login {
-  display: block;
-} */
 
 /* MAIN */
 .app {
@@ -137,14 +121,20 @@ body {
   margin-bottom: 2rem;
 }
 
-.balance__top {
+.balance__welcome-logo {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.balance__top > div {
-  margin-right: 2em;
+.balance__welcome-logo > .welcome {
+  font-size: 3rem;
+}
+
+.balance__welcome-logo > .logo {
+  position: relative;
+  left: 60rem;
+  bottom: 3ch;
 }
 
 .balance__label {
@@ -238,15 +228,6 @@ body {
   color: #f5465d;
 }
 
-/* .btn--sort {
-  margin-left: auto;
-  border: none;
-  background: none;
-  font-size: 1.3rem;
-  font-weight: 500;
-  cursor: pointer;
-} */
-
 /* OPERATIONS */
 .operation {
   border-radius: 1rem;
@@ -329,7 +310,7 @@ h2 {
 .logout-timer {
   padding: 0 0.3rem;
   margin-top: 1.9rem;
-  text-align: right;
+  text-align: left;
   font-size: 1.25rem;
 }
 
@@ -348,11 +329,21 @@ h2 {
 
   .login__section {
     font-size: 3rem;
-    margin-top: 18rem;
+    margin-top: 23rem;
+  }
+
+  .balance__welcome-logo > .welcome {
+    font-size: 2.8rem;
+  }
+
+  .balance__welcome-logo > .logo {
+    top: 0;
+    left: 0.5ch;
   }
 
   .app {
     margin-top: 3em;
+    padding-bottom: 2em;
     display: block;
   }
 
@@ -396,5 +387,13 @@ h2 {
 
   .logout-timer {
     padding-bottom: 1.2em;
+    text-align: right;
+  }
+
+  .signout_btn {
+    position: relative;
+    top: 5rem;
+    left: 0;
+    width: 15ch;
   }
 }
