@@ -57,6 +57,7 @@ const btnLogin = document.querySelector(".login__btn");
 const btnTransfer = document.querySelector(".form__btn--transfer");
 const btnLoan = document.querySelector(".form__btn--loan");
 const btnClose = document.querySelector(".form__btn--close");
+const btnSignout = document.querySelector(".signout_btn");
 
 const inputLoginUsername = document.querySelector(".login__input--user");
 const inputLoginPin = document.querySelector(".login__input--pin");
@@ -290,9 +291,7 @@ btnClose.addEventListener("click", function (e) {
   inputCloseUsername.value = inputClosePin.value = "";
 });
 
-// let sorted = false;
-// btnSort.addEventListener("click", function (e) {
-//   e.preventDefault();
-//   displayMovements(currentAccount.movements, !sorted);
-//   sorted = !sorted;
-// });
+btnSignout.addEventListener("click", function () {
+  containerApp.style.opacity = 0;
+  loginSection.style.display = "flex";
+});
