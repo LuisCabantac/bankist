@@ -75,10 +75,11 @@ body {
   border: 1px solid #ccc;
 }
 
-.login__btn {
+.login__btn,
+.signout_btn {
   border: none;
   background-color: #5ec576;
-  /* font-family: inherit; */
+  font-family: inherit;
   font-size: 1.8rem;
   width: 35rem;
   color: #222;
@@ -86,6 +87,12 @@ body {
   border-radius: 10rem;
   cursor: pointer;
   transition: all 0.3s;
+}
+
+.signout_btn {
+  position: relative;
+  top: 5rem;
+  width: 15ch;
 }
 
 .login__btn:hover,
@@ -345,7 +352,7 @@ h2 {
   }
 
   .app {
-    margin-top: 1em;
+    margin-top: 3em;
     display: block;
   }
 
@@ -362,13 +369,13 @@ h2 {
 
   .movements {
     grid-row: 2 / span 3;
-    width: 65ch;
+    width: 68ch;
   }
 
   .summary {
     display: flex;
     align-items: center;
-    margin: 1rem 0;
+    margin: 1rem 3rem;
   }
 
   .summary__label {

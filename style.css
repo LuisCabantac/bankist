@@ -828,4 +828,42 @@ h4 {
     position: relative;
     width: 20ch;
   }
+
+  .testimonial {
+    width: 65%;
+    position: relative;
+  }
+
+  .testimonial__header {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial__text {
+    font-size: 1.3rem;
+    margin-bottom: 3rem;
+  }
+
+  .testimonial__author {
+    margin-left: 3rem;
+    font-style: normal;
+
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    column-gap: 2rem;
+  }
+
+  .testimonial__photo {
+    grid-row: 1 / span 2;
+    width: 6rem;
+    border-radius: 50%;
+  }
+
+  .testimonial__name {
+    font-size: 1.5rem;
+  }
+
+  .testimonial__location {
+    font-size: 1.3rem;
+  }
 }
