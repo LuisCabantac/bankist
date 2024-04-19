@@ -1,7 +1,7 @@
 "use strict";
 
 const account1 = {
-  owner: "Ban Kist",
+  owner: "Rodolfo Vargas",
   movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
   interestRate: 1.2,
   pin: 1111,
@@ -12,16 +12,16 @@ const account1 = {
     "2020-01-28T09:15:04.904Z",
     "2020-04-01T10:17:24.185Z",
     "2020-05-08T14:11:59.604Z",
-    "2020-05-27T17:01:17.194Z",
-    "2020-07-11T23:36:17.929Z",
-    "2020-07-12T10:51:36.790Z",
+    "2020-07-26T17:01:17.194Z",
+    "2020-07-28T23:36:17.929Z",
+    "2020-08-01T10:51:36.790Z",
   ],
   currency: "PHP",
   locale: "en-PH",
 };
 
 const account2 = {
-  owner: "Kist Ban",
+  owner: "Clark Ashley",
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
@@ -41,7 +41,6 @@ const account2 = {
 };
 
 const accounts = [account1, account2];
-
 const labelWelcome = document.querySelector(".welcome");
 const labelDate = document.querySelector(".date");
 const labelBalance = document.querySelector(".balance__value");
@@ -69,15 +68,23 @@ const inputClosePin = document.querySelector(".form__input--pin");
 const loginSection = document.querySelector(".login__section");
 
 const formatMovementDate = function (date, locale) {
-  const calcdayPassed = (date1, date2) =>
+  const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
-  const daysPassed = calcdayPassed(new Date(), date);
+
+  const daysPassed = calcDaysPassed(new Date(), date);
 
   if (daysPassed === 0) return "Today";
   if (daysPassed === 1) return "Yesterday";
   if (daysPassed <= 7) return `${daysPassed} days ago`;
 
   return new Intl.DateTimeFormat(locale).format(date);
+};
+
+const formatCur = function (value, locale, currency) {
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: currency,
+  }).format(value);
 };
 
 const displayMovements = function (acc, sort = false) {
@@ -100,7 +107,7 @@ const displayMovements = function (acc, sort = false) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-    <div class="movements__date">${displayDate}</div>
+        <div class="movements__date">${displayDate}</div>
         <div class="movements__value">${formattedMov}</div>
       </div>
     `;
@@ -109,16 +116,8 @@ const displayMovements = function (acc, sort = false) {
   });
 };
 
-const formatCur = function (value, locale, currency) {
-  return new Intl.NumberFormat(locale, {
-    style: "currency",
-    currency: currency,
-  }).format(value);
-};
-
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-
   labelBalance.textContent = formatCur(acc.balance, acc.locale, acc.currency);
 };
 
@@ -166,6 +165,7 @@ const startLogOutTimer = function () {
   const tick = function () {
     const min = String(Math.trunc(time / 60)).padStart(2, 0);
     const sec = String(time % 60).padStart(2, 0);
+
     labelTimer.textContent = `${min}:${sec}`;
 
     if (time === 0) {
@@ -177,10 +177,12 @@ const startLogOutTimer = function () {
 
     time--;
   };
+
   let time = 120;
 
   tick();
   const timer = setInterval(tick, 1000);
+
   return timer;
 };
 
@@ -198,7 +200,6 @@ btnLogin.addEventListener("click", function (e) {
       currentAccount.owner.split(" ")[0]
     }`;
     containerApp.style.opacity = 100;
-    loginSection.style.display = "none";
 
     const now = new Date();
     const options = {
@@ -208,18 +209,20 @@ btnLogin.addEventListener("click", function (e) {
       month: "numeric",
       year: "numeric",
     };
+
     labelDate.textContent = new Intl.DateTimeFormat(
       currentAccount.locale,
       options
     ).format(now);
 
-    if (timer) clearInterval(timer);
-    timer = startLogOutTimer();
-
     inputLoginUsername.value = inputLoginPin.value = "";
     inputLoginPin.blur();
 
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
+
     updateUI(currentAccount);
+    loginSection.style.display = "none";
   }
 });
 
@@ -238,9 +241,14 @@ btnTransfer.addEventListener("click", function (e) {
     receiverAcc?.username !== currentAccount.username
   ) {
     currentAccount.movements.push(-amount);
-    receiverAcc.movements.push(amount);
-    currentAccount.movementsDates.push(new Date());
-    receiverAcc.movements.push(new Date());
+    receiverAcc.currency === "USD"
+      ? receiverAcc.movements.push(amount * 0.017)
+      : receiverAcc.currency === "PHP"
+      ? receiverAcc.movements.push(amount * 57.54)
+      : receiverAcc.movements.push(amount);
+
+    currentAccount.movementsDates.push(new Date().toISOString());
+    receiverAcc.movementsDates.push(new Date().toISOString());
 
     updateUI(currentAccount);
 
@@ -282,6 +290,7 @@ btnClose.addEventListener("click", function (e) {
     const index = accounts.findIndex(
       (acc) => acc.username === currentAccount.username
     );
+
     accounts.splice(index, 1);
 
     containerApp.style.opacity = 0;
@@ -294,4 +303,6 @@ btnClose.addEventListener("click", function (e) {
 btnSignout.addEventListener("click", function () {
   containerApp.style.opacity = 0;
   loginSection.style.display = "flex";
+
+  updateUI(currentAccount);
 });
