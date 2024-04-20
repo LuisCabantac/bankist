@@ -99,6 +99,11 @@ body {
   justify-content: space-between;
 }
 
+.go-to-main > a {
+  color: #5ec576;
+  font-size: 1.3rem;
+}
+
 /* MAIN */
 .app {
   position: relative;
@@ -335,6 +340,10 @@ h2 {
   .login__section {
     font-size: 3rem;
     margin-top: 23rem;
+  }
+
+  .go-to-main {
+    font-size: 1.5rem;
   }
 
   .balance__section {
