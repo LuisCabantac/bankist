@@ -767,7 +767,7 @@ h4 {
 
   .operations__tab {
     padding: 1.4em 1.5em;
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 
   .footer {
@@ -846,11 +846,6 @@ h4 {
 
   .testimonial__author {
     margin-left: 3rem;
-    font-style: normal;
-
-    display: grid;
-    grid-template-columns: 6.5rem 1fr;
-    column-gap: 2rem;
   }
 
   .testimonial__photo {

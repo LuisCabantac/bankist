@@ -170,6 +170,7 @@ const displayLoginSection = function () {
   loginSection.style.display = "flex";
   loginSection.style.opacity = 1;
   loginSection.style.visibility = "visible";
+  scrollToTop();
 };
 
 const hideLoginSection = function () {
@@ -189,7 +190,6 @@ const startLogOutTimer = function () {
       clearInterval(timer);
       labelWelcome.textContent = "Log in to get started";
       displayLoginSection();
-      scrollToTop();
     }
 
     time--;
@@ -311,12 +311,10 @@ btnClose.addEventListener("click", function (e) {
     accounts.splice(index, 1);
   }
   displayLoginSection();
-  scrollToTop();
   inputCloseUsername.value = inputClosePin.value = "";
 });
 
 btnSignout.addEventListener("click", function () {
   updateUI(currentAccount);
   displayLoginSection();
-  scrollToTop();
 });
