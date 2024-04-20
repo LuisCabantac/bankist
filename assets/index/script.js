@@ -24,7 +24,7 @@ document
   .addEventListener("click", () => message.remove());
 
 message.style.backgroundColor = "#373B3d";
-message.style.width = "120%";
+message.style.width = "113%";
 message.style.height =
   Number.parseFloat(getComputedStyle(message).height, 10) + 30 + "px";
 
